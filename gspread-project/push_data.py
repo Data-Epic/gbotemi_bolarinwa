@@ -11,10 +11,6 @@ def service_file(file_path: str) -> gspread.client:
     """
     this function load google service account file
     """
-    # config = dotenv_values()
-    # print(config)
-
-    # gc = gspread.service_account_from_dict(config)
     gc = gspread.service_account(file_path)
     logging.info("service file loaded successfully")
 
@@ -58,6 +54,9 @@ def load_file_into_dataframe(link_to_dataset: str) -> pd.DataFrame:
     return df
 
 def update_worksheet(worksheet: gspread.spreadsheet, df: pd.DataFrame) -> None:
+    """
+    this function update the created worksheet:worksheet with data from dataframe:df
+    """
     worksheet.update([df.columns.values.tolist()] + df.values.tolist())
     logging.info("worksheet updated successfully")
 
@@ -77,11 +76,22 @@ def run(user_email: str, file: str, service_file_path: str, sheet_title: str, wo
     return None
 
 if __name__=="__main__":
+
+    # the user_email is needed as it will grant the user access to the google sheet and grant the user permission to edit the worksheet
     user_email = "gbotemibolarinwa@gmail.com"
+
+    # file is the filepath to the dataset on local system or a direct link
     file = "https://github.com/GbotemiB/MLOps_zoomcamp/raw/main/data/Housing_dataset_train.csv"
+    
+    # service_file_path is the filepath to the secret to access google apis
     service_file_path = ".env"
+
+    # sheet_title is the title of the google spreadsheet
     sheet_title = "housing_dataset"
+
+    # worksheet_title assign a title to the worksheet
     worksheet_title = "first"
 
+    # the run method execute the whole process 
     run(user_email, file, service_file_path, sheet_title, worksheet_title)
 
