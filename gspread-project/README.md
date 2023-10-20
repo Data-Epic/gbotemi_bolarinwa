@@ -18,7 +18,7 @@ you will need to create a virtual environment and install the following librarie
     ```
 - To install the needed libraries run 
     ```
-    pip install gspread pandas
+    pip install gspread pandas python-dotenv
     ```
 
 ### Enable API access
@@ -32,9 +32,21 @@ you will need to create a virtual environment and install the following librarie
 - Press on ⋮ near recently created service account and select “Manage keys” and then click on “ADD KEY > Create new key”.
 - Select JSON key type and press “Create”.
 - This will automatically download a json file. 
-- Run `touch .env` in the project directory to create a new file. 
+- Run `touch secret.json` in the project directory to create a new file. 
 - Store the content of the downloaded json file in the created file.
 
+### Environment Variables
+create an `.env` file to store all the variables needed to run this script successfully.
+
+Run `touch .env` to create the file.
+Copy the following into the file and replace with your details.
+```
+email = <replace with email>
+service_file_path = <replace with file_path to secret.json>
+sheet_title = <replace with sheet_title>
+worksheet_title = <replace with worksheet_title>
+file_path = <replace with file path>
+```
 
 ## Workflow
 
