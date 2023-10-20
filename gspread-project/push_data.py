@@ -74,9 +74,8 @@ def run(user_email: str, file: str, service_file_path: str, sheet_title: str, wo
     df = load_file_into_dataframe(file)
     update_worksheet(worksheet, df)
 
-    return None
-
 if __name__=="__main__":
+    # load environment variable
     load_dotenv()
 
     my_password = os.getenv("Password")
