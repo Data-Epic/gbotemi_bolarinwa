@@ -20,6 +20,10 @@ you will need to create a virtual environment and install the following librarie
     ```
     pip install gspread pandas python-dotenv
     ```
+- change working directory
+    ```
+    cd gspread-project
+    ```
 
 ### Enable API access
 
@@ -58,6 +62,11 @@ file_path = <replace with file path>
 - **worksheet_title**: this is the worksheet title
 
 The main script creates a new google spreadsheet and user_email as an editor. It then load the dataset into a pandas dataframe. The dataframe is thereafter used to fill the google worksheet.
+
+To run the script, run
+    ```
+    python push_data.py
+    ```
 
 ## Contribution to Knowledge
 To learn more about gspread package, [click here](https://docs.gspread.org/en/v5.10.0/index.html)
