@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import gspread
 import pandas as pd
 import logging
@@ -43,7 +44,7 @@ def create_worksheet(sheet: gspread.spreadsheet, title: str) -> None:
 
     return worksheet
 
-def load_file_into_dataframe(link_to_dataset: str) -> pd.DataFrame:
+def load_file_into_dataframe(file: str) -> pd.DataFrame:
     """
     this function read the dataset with pandas and drop nan values
     """
@@ -73,25 +74,25 @@ def run(user_email: str, file: str, service_file_path: str, sheet_title: str, wo
     df = load_file_into_dataframe(file)
     update_worksheet(worksheet, df)
 
-    return None
-
 if __name__=="__main__":
+    # load environment variable
+    load_dotenv()
 
+    my_password = os.getenv("Password")
     # the user_email is needed as it will grant the user access to the google sheet and grant the user permission to edit the worksheet
-    user_email = "gbotemibolarinwa@gmail.com"
+    user_email = os.getenv("email")
 
     # file is the filepath to the dataset on local system or a direct link
-    file = "https://github.com/GbotemiB/MLOps_zoomcamp/raw/main/data/Housing_dataset_train.csv"
-    
+    file = os.getenv("file_path")
+
     # service_file_path is the filepath to the secret to access google apis
-    service_file_path = ".env"
+    service_file_path = os.getenv("service_file_path")
 
     # sheet_title is the title of the google spreadsheet
-    sheet_title = "housing_dataset"
+    sheet_title = os.getenv("sheet_title")
 
     # worksheet_title assign a title to the worksheet
-    worksheet_title = "first"
+    worksheet_title = os.getenv("worksheet_title")
 
-    # the run method execute the whole process 
+    # the run method execute the whole process
     run(user_email, file, service_file_path, sheet_title, worksheet_title)
-
