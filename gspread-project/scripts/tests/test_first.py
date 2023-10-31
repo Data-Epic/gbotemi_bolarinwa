@@ -1,40 +1,23 @@
 import os
-from push_data import *
+from push_data import load_file_into_dataframe, add_email, create_worksheet
 import pandas as pd
 import gspread
-from dotenv import load_dotenv
 import json
 from unittest.mock import MagicMock
+import pytest
 
-def test_service_file_path():
+
+def test_service_file_path(load_service_file):
     """
     This test the service file path declared in .env if it contains neccessary keys
     """
-    load_dotenv()
-    path = os.getenv("service_file_path")
-    with open(path) as jsonFile:
-        data = json.load(jsonFile)
-        keys = data.keys()
-
-        assert 'private_key_id' in keys
-        assert 'project_id' in keys
-        assert 'client_id' in keys
-        assert 'token_uri' in keys
-        assert 'auth_uri' in keys
-
-def test_create_spreadsheet():
-    """
-    tests the create spreadsheet function
-    """
-
-    load_dotenv()
-    service = os.getenv("service_file_path")
-    title = os.getenv("title")
-    gc = gspread.service_account(service)
-
-    assert gc
-    assert create_spreadsheet(gc, title)
-    assert type(gc) == gspread.client.Client    
+    _, keys = load_service_file
+    assert 'private_key_id' in keys
+    assert 'project_id' in keys
+    assert 'client_id' in keys
+    assert 'token_uri' in keys
+    assert 'auth_uri' in keys
+  
 
 def test_load_file_into_dataframe():
     """
