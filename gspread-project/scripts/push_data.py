@@ -35,7 +35,7 @@ def add_email(sheet: gspread.spreadsheet, user_mail: str) -> None:
 
     return None
 
-def create_worksheet(sheet: gspread.spreadsheet, title: str) -> None:
+def create_worksheet(sheet: gspread.spreadsheet, title: str) -> gspread.worksheet:
     """
     function creates a worksheet
     """
